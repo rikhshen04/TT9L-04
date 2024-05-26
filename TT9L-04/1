@@ -7,23 +7,4 @@ app = Flask(__name__)
 def home():
         return "Hello channel welcome to my guys"
         
-        username = request.form['Username']
-        password = request.form['Password']
-
-        
-        if username == 'admin' and password == 'password':
-            return 'Login successful!'
-        else:
-            return 'Invalid username or password'
-
-   
-    return render_template('login.html')
-
-@app.route('/greet', methods=['POST'])
-def greet():
-    name = request.form['name']
-    return f'Hello, {name}!'
-
-if __name__ == '__main__':
-    app.run()
 
