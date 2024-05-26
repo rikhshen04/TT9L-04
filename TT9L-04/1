@@ -6,8 +6,8 @@ app = Flask(__name__)
 def login():
     if request.method == 'POST':
         
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form['Username']
+        password = request.form['Password']
 
         
         if username == 'admin' and password == 'password':
