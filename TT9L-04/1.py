@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
 
 
 
-        class RegisterForm(FlaskForm):
+class RegisterForm(FlaskForm):
                 username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Username"})
                 password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Password"})
 
@@ -27,7 +27,7 @@ class User(db.Model, UserMixin):
                 def validate_username(self, username):
                         existing_user_username = User.query.filter_by(username=username.data).first()
 
-        class LoginFrom(FlaskForm):
+class LoginForm(FlaskForm):
                 username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Username"})
                 password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Password"})
 
@@ -41,8 +41,9 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-        form = LoginForm()
-        return render_template('login.html', form=form)
+        form = LoginForm
+        
+        return render_template('login.html' , form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
