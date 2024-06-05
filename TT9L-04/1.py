@@ -27,7 +27,7 @@ class User(db.Model, UserMixin):
                 def validate_username(self, username):
                         existing_user_username = User.query.filter_by(username=username.data).first()
 
-        class LoginFrom(FlaskForm)
+        class LoginFrom(FlaskForm):
                 username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Username"})
                 password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Password"})
 
