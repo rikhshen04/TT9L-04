@@ -6,59 +6,136 @@
     <title>Login</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('background3.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
+            min-height: 100vh;
         }
         .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px 50px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
-        .container input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
-        .container button {
-            width: 100%;
+        .input-group {
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            font-size: 1.1em;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="password"] {
             padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
             border: none;
-            border-radius: 4px;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
         }
-        .container button:hover {
-            background-color: #0056b3;
+        .button {
+            background: #FF5722;
+            color: white;
+            padding: 15px 25px;
+            text-align: center;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            transition: background 0.3s ease;
+            margin-bottom: 10px;
+        }
+        .button:hover {
+            background: #E64A19;
+        }
+        .register-button {
+            background: #4CAF50;
+        }
+        .register-button:hover {
+            background: #388E3C;
+        }
+        .error {
+            color: red;
+            font-size: 1.1em;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Login</h2>
-        <input type="text" id="loginId" placeholder="Enter Login ID">
-        <input type="password" id="loginPassword" placeholder="Enter Password">
-        <button onclick="login()">Login</button>
-        <button onclick="goToRegister()">Register</button>
+        <h1>Login</h1>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="button" class="button" onclick="login()">Login</button>
+        </form>
+        <p class="error" id="error"></p>
+        <button type="button" class="button register-button" onclick="redirectToRegister()">Register</button>
     </div>
 
     <script>
         function login() {
-            var loginId = document.getElementById('loginId').value;
-            var loginPassword = document.getElementById('loginPassword').value;
-            alert("Login ID: " + loginId + " Password: " + loginPassword);
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.token) {
+                    localStorage.setItem('token', data.token);
+                    window.location.href = 'homepage.html';
+                } else {
+                    document.getElementById('error').textContent = 'Invalid credentials. Please try again.';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('error').textContent = 'An error occurred. Please try again.';
+            });
         }
 
-        function goToRegister() {
-            window.location.href = "register.html";
+        function redirectToRegister() {
+            window.location.href = 'register.html';
         }
+
+        // Caps lock detection function
+        document.getElementById("password").addEventListener("keyup", function(event) {
+            if (event.getModifierState("CapsLock")) {
+                document.getElementById("error").textContent = "Caps Lock is ON";
+            } else {
+                document.getElementById("error").textContent = "";
+            }
+        });
     </script>
 </body>
 </html>
