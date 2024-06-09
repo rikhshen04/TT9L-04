@@ -6,66 +6,194 @@
     <title>Register</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('background3.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
+            min-height: 100vh;
         }
         .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px 50px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
-        .container input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
-        .container button {
-            width: 100%;
+        .input-group {
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            font-size: 1.1em;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="password"] {
             padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
             border: none;
-            border-radius: 4px;
-            background-color: #28a745;
-            color: white;
-            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
         }
-        .container button:hover {
-            background-color: #218838;
+        .button {
+            background: #FF5722;
+            color: white;
+            padding: 15px 25px;
+            text-align: center;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            transition: background 0.3s ease;
+            margin-bottom: 10px;
+        }
+        .button:hover {
+            background: #E64A19;
+        }
+        .error {
+            color: red;
+            font-size: 1.1em;
+        }
+        .loading {
+            display: none;
+            color: #FF5722;
+        }
+        .input-group.password {
+            position: relative;
+        }
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #fff;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Register</h2>
-        <input type="text" id="newLoginId" placeholder="Enter New Login ID">
-        <input type="password" id="newLoginPassword" placeholder="Enter New Password">
-        <button onclick="register()">Register</button>
+        <h1>Register</h1>
+        <form id="registerForm">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group password">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <span class="toggle-password" onclick="togglePassword()">Show</span>
+            </div>
+            <div class="input-group password">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                <span class="toggle-password" onclick="toggleConfirmPassword()">Show</span>
+            </div>
+            <div class="input-group">
+                <label id="passwordStrength" for="password"></label>
+            </div>
+            <div class="input-group">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the <a href="#">Terms and Conditions</a></label>
+            </div>
+            <button type="button" class="button" onclick="register()">Register</button>
+        </form>
+        <p class="error" id="error"></p>
+        <p class="loading" id="loading">Registering...</p>
     </div>
 
     <script>
-        function register() {
-            var newLoginId = document.getElementById('newLoginId').value;
-            var newLoginPassword = document.getElementById('newLoginPassword').value;
-            if (newLoginId && newLoginPassword) {
-                fetch('/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id: newLoginId, password: newLoginPassword })
-                })
-                .then(response => response.text())
-                .then(data => alert(data))
-                .catch(error => console.error('Error:', error));
-            } else {
-                alert("Please enter both ID and Password");
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const passwordStrengthLabel = document.getElementById('passwordStrength');
+        const errorElement = document.getElementById('error');
+        const loadingElement = document.getElementById('loading');
+
+        passwordInput.addEventListener('input', updatePasswordStrength);
+        confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+
+        function updatePasswordStrength() {
+            const password = passwordInput.value;
+            let strength = 'Weak';
+            if (password.length >= 8 && /[A-Z]/.test(password) && /[a-z]/.test(password) && /[0-9]/.test(password) && /[\W_]/.test(password)) {
+                strength = 'Strong';
+            } else if (password.length >= 6) {
+                strength = 'Moderate';
             }
+            passwordStrengthLabel.textContent = `Password Strength: ${strength}`;
+        }
+
+        function validateConfirmPassword() {
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            if (password !== confirmPassword) {
+                errorElement.textContent = 'Passwords do not match.';
+            } else {
+                errorElement.textContent = '';
+            }
+        }
+
+        function togglePassword() {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            document.querySelector('.toggle-password').textContent = type === 'password' ? 'Show' : 'Hide';
+        }
+
+        function toggleConfirmPassword() {
+            const type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
+            confirmPasswordInput.type = type;
+            document.querySelectorAll('.toggle-password')[1].textContent = type === 'password' ? 'Show' : 'Hide';
+        }
+
+        function register() {
+            const username = document.getElementById('username').value;
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            if (password !== confirmPassword) {
+                errorElement.textContent = 'Passwords do not match.';
+                return;
+            }
+
+            loadingElement.style.display = 'block';
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadingElement.style.display = 'none';
+                if (data.success) {
+                    window.location.href = 'login.html';
+                } else {
+                    errorElement.textContent = data.message || 'Registration failed. Please try again.';
+                }
+            })
+            .catch(error => {
+                loadingElement.style.display = 'none';
+                console.error('Error:', error);
+                errorElement.textContent = 'An error occurred. Please try again.';
+            });
         }
     </script>
 </body>
