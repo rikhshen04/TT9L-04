@@ -162,18 +162,23 @@
             `;
         }
 
-        // Update slider values dynamically
+        function updateValue(elementId, value) {
+            document.getElementById(elementId).textContent = value;
+            calculateInterest();
+        }
+
         document.getElementById('principal').addEventListener('input', function() {
-            document.getElementById('principalValue').textContent = this.value;
+            updateValue('principalValue', this.value);
         });
 
         document.getElementById('rate').addEventListener('input', function() {
-            document.getElementById('rateValue').textContent = this.value;
+            updateValue('rateValue', this.value);
         });
 
         document.getElementById('years').addEventListener('input', function() {
-            document.getElementById('yearsValue').textContent = this.value;
+            updateValue('yearsValue', this.value);
         });
     </script>
 </body>
 </html>
+
