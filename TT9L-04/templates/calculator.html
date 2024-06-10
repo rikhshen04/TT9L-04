@@ -207,7 +207,24 @@
                     }
                 }
             });
+
+            evaluateSpending(balance, totalExpenses, salary);
+        }
+
+        function evaluateSpending(balance, totalExpenses, salary) {
+            let advice = '';
+
+            if (balance < 0) {
+                advice = 'You are overspending! Consider reducing unnecessary expenses.';
+            } else if (balance < salary * 0.1) {
+                advice = 'You are cutting it close. Try to save more where possible.';
+            } else {
+                advice = 'You are managing your expenses well!';
+            }
+
+            document.getElementById('result').innerText += ` ${advice}`;
         }
     </script>
 </body>
 </html>
+
