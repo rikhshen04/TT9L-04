@@ -91,3 +91,23 @@
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Calculate Loan Interest</h1>
+        <form id="loanForm">
+            <div class="input-group">
+                <label for="principal">Principal Amount (RM):</label>
+                <input type="text" id="principal" name="principal" placeholder="Enter principal amount in RM">
+            </div>
+            <div class="input-group">
+                <label for="rate">Annual Interest Rate (%):</label>
+                <input type="text" id="rate" name="rate" placeholder="Enter annual interest rate">
+            </div>
+            <div class="input-group">
+                <label for="years">Loan Term (Years):</label>
+                <input type="text" id="years" name="years" placeholder="Enter loan term in years">
+            </div>
+            <button type="button" class="button" onclick="calculateInterest()">Calculate</button>
+        </form>
+        <p id="result"></p>
+        <a href="homepage.html" class="small-button">Back to Home</a>
+    </div>
