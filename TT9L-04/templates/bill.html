@@ -62,3 +62,42 @@
         }
     </style>
 </head>
+<body>
+    <div class="container">
+        <h1>Upcoming Bills and Payments</h1>
+        <div class="form-group">
+            <label for="bill-name">Bill Name:</label>
+            <input type="text" id="bill-name" name="bill-name" placeholder="Enter bill name">
+        </div>
+        <div class="form-group">
+            <label for="due-date">Due Date:</label>
+            <input type="date" id="due-date" name="due-date">
+        </div>
+        <button class="button" onclick="addBill()">Add Bill</button>
+
+        <div id="bill-list"></div>
+    </div>
+
+    <script>
+        function addBill() {
+            var billName = document.getElementById('bill-name').value;
+            var dueDate = document.getElementById('due-date').value;
+
+            if (billName.trim() === '' || dueDate.trim() === '') {
+                alert('Please enter both bill name and due date.');
+                return;
+            }
+
+            var billList = document.getElementById('bill-list');
+            var billItem = document.createElement('div');
+            billItem.className = 'bill-item';
+            billItem.innerHTML = '<span class="bill-name">' + billName + ':</span> <span class="bill-due">Due on ' + dueDate + '</span>';
+            billList.appendChild(billItem);
+
+            // Clear input fields after adding the bill
+            document.getElementById('bill-name').value = '';
+            document.getElementById('due-date').value = '';
+        }
+    </script>
+</body>
+</html>
