@@ -76,6 +76,10 @@
             color: #dc3545;
             font-weight: bold;
         }
+        .days-left {
+            font-size: 14px;
+            color: #6c757d;
+        }
     </style>
 </head>
 <body>
@@ -114,7 +118,13 @@
             var billList = document.getElementById('bill-list');
             var billItem = document.createElement('div');
             billItem.className = 'bill-item';
+            
+            // Calculate days left
+            var daysLeft = Math.ceil((new Date(dueDate) - new Date()) / (1000 * 60 * 60 * 24));
+            var daysLeftText = daysLeft > 0 ? daysLeft + ' day(s) left' : 'Due today';
+
             billItem.innerHTML = '<span class="bill-name">' + billName + ':</span> <span class="bill-due">Due on ' + dueDate + '</span>' +
+                '<span class="days-left">' + daysLeftText + '</span>' +
                 '<button class="mark-paid-button" onclick="markAsPaid(this)">Mark as Paid</button>';
             billList.appendChild(billItem);
 
