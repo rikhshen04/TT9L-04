@@ -6,22 +6,28 @@
     <title>Upcoming Bills and Payments</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .container {
+            width: 90%;
             max-width: 600px;
-            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
+            color: #343a40;
             margin-bottom: 20px;
+            font-size: 24px;
         }
         .form-group {
             margin-bottom: 15px;
@@ -29,36 +35,46 @@
         label {
             display: block;
             font-weight: bold;
+            margin-bottom: 5px;
+            color: #495057;
         }
         input[type="text"], input[type="date"] {
             width: 100%;
             padding: 10px;
             border-radius: 5px;
-            border: 1px solid #ccc;
+            border: 1px solid #ced4da;
+            font-size: 16px;
+            color: #495057;
         }
         .button {
-            background-color: #4CAF50;
+            background-color: #28a745;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
         .button:hover {
-            background-color: #45a049;
+            background-color: #218838;
         }
         .bill-item {
             margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
+            padding: 15px;
+            border: 1px solid #ced4da;
             border-radius: 5px;
-            background-color: #f9f9f9;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .bill-name {
             font-weight: bold;
+            color: #495057;
         }
         .bill-due {
-            color: #FF5733;
+            color: #dc3545;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -83,10 +99,8 @@
             var billName = document.getElementById('bill-name').value;
             var dueDate = document.getElementById('due-date').value;
 
-            
             var currentDate = new Date().toISOString().split('T')[0];
 
-            
             if (dueDate < currentDate) {
                 alert('Due date cannot be in the past.');
                 return;
