@@ -78,6 +78,21 @@
             height: 400px;
             margin-top: 20px;
         }
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .badge {
+            background: #FFD700;
+            color: #000;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
@@ -136,10 +151,13 @@
         <div id="chartContainer">
             <canvas id="expenseChart"></canvas>
         </div>
+        <div class="badge-container" id="badgeContainer">
+            <!-- Badges will be added here -->
+        </div>
     </div>
 
     <script>
-                async function processReceipt() {
+        async function processReceipt() {
             const file = document.getElementById('receipt').files[0];
             if (file) {
                 const reader = new FileReader();
@@ -149,7 +167,6 @@
                     img.onload = async function() {
                         Tesseract.recognize(
                             img,
-                            'eng',
                             'eng',
                             {
                                 logger: m => console.log(m) // Optional: Logs progress to console
@@ -255,6 +272,7 @@
             });
 
             evaluateSpending(balance, totalExpenses, salary);
+            awardBadges(balance, salary);
         }
 
         function evaluateSpending(balance, totalExpenses, salary) {
@@ -263,16 +281,41 @@
             if (balance < 0) {
                 advice = 'You are overspending! Consider reducing unnecessary expenses.';
             } else if (balance < salary * 0.1) {
-                advice = 'You are cutting it close. Try to not spend on unnecessary things';
+                advice = 'You are cutting it close. Try to not spend on unnecessary things.';
             } else {
-                advice = 'Congratulations!!!You are managing your expenses well!';
+                advice = 'Congratulations!!! You are managing your expenses well!';
             }
 
             document.getElementById('result').innerText += ` ${advice}`;
         }
+
+        function awardBadges(balance, salary) {
+            const badgeContainer = document.getElementById('badgeContainer');
+            badgeContainer.innerHTML = '';
+
+            if (balance >= salary * 0.5) {
+                const badge = document.createElement('div');
+                badge.className = 'badge';
+                badge.innerText = 'Super Saver: 50% Savings Achieved';
+                badgeContainer.appendChild(badge);
+            }
+            if (balance >= salary * 0.2) {
+                const badge = document.createElement('div');
+                badge.className = 'badge';
+                badge.innerText = 'Smart Saver: 20% Savings Achieved';
+                badgeContainer.appendChild(badge);
+            }
+            if (balance >= 0) {
+                const badge = document.createElement('div');
+                badge.className = 'badge';
+                badge.innerText = 'Balanced Budget: No Overspending';
+                badgeContainer.appendChild(badge);
+            }
+        }
     </script>
 </body>
 </html>
+
 
 
 
