@@ -114,12 +114,19 @@
             var billList = document.getElementById('bill-list');
             var billItem = document.createElement('div');
             billItem.className = 'bill-item';
-            billItem.innerHTML = '<span class="bill-name">' + billName + ':</span> <span class="bill-due">Due on ' + dueDate + '</span>';
+            billItem.innerHTML = '<span class="bill-name">' + billName + ':</span> <span class="bill-due">Due on ' + dueDate + '</span>' +
+                '<button class="mark-paid-button" onclick="markAsPaid(this)">Mark as Paid</button>';
             billList.appendChild(billItem);
 
             // Clear input fields after adding the bill
             document.getElementById('bill-name').value = '';
             document.getElementById('due-date').value = '';
+        }
+
+        function markAsPaid(button) {
+            var billItem = button.parentElement;
+            billItem.classList.toggle('paid');
+            button.textContent = button.textContent === 'Mark as Paid' ? 'Unmark Paid' : 'Mark as Paid';
         }
     </script>
 </body>
