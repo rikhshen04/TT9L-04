@@ -30,7 +30,7 @@
             display: block;
             font-weight: bold;
         }
-        input[type="text"] {
+        input[type="text"], input[type="date"] {
             width: 100%;
             padding: 10px;
             border-radius: 5px;
@@ -82,6 +82,15 @@
         function addBill() {
             var billName = document.getElementById('bill-name').value;
             var dueDate = document.getElementById('due-date').value;
+
+            
+            var currentDate = new Date().toISOString().split('T')[0];
+
+            
+            if (dueDate < currentDate) {
+                alert('Due date cannot be in the past.');
+                return;
+            }
 
             if (billName.trim() === '' || dueDate.trim() === '') {
                 alert('Please enter both bill name and due date.');
