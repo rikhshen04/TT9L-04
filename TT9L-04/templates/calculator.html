@@ -139,7 +139,7 @@
     </div>
 
     <script>
-        async function processReceipt() {
+                async function processReceipt() {
             const file = document.getElementById('receipt').files[0];
             if (file) {
                 const reader = new FileReader();
@@ -149,6 +149,7 @@
                     img.onload = async function() {
                         Tesseract.recognize(
                             img,
+                            'eng',
                             'eng',
                             {
                                 logger: m => console.log(m) // Optional: Logs progress to console
@@ -262,9 +263,9 @@
             if (balance < 0) {
                 advice = 'You are overspending! Consider reducing unnecessary expenses.';
             } else if (balance < salary * 0.1) {
-                advice = 'You are cutting it close. Try to save more where possible.';
+                advice = 'You are cutting it close. Try to not spend on unnecessary things';
             } else {
-                advice = 'You are managing your expenses well!';
+                advice = 'Congratulations!!!You are managing your expenses well!';
             }
 
             document.getElementById('result').innerText += ` ${advice}`;

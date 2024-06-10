@@ -43,14 +43,36 @@
             flex: 1 1 45%;
             text-align: left;
         }
-        input[type="text"] {
-            padding: 10px;
-            font-size: 1em;
-            border-radius: 5px;
-            border: none;
+        input[type="range"] {
+            -webkit-appearance: none;
             width: 50%;
-            box-sizing: border-box;
+            height: 20px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            border-radius: 5px;
             margin: 5px 0;
+        }
+        input[type="range"]:hover {
+            opacity: 1;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #FF5722;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #FF5722;
+            cursor: pointer;
+            border-radius: 50%;
         }
         .button {
             background: #FF5722;
@@ -96,15 +118,18 @@
         <form id="loanForm">
             <div class="input-group">
                 <label for="principal">Principal Amount (RM):</label>
-                <input type="text" id="principal" name="principal" placeholder="Enter principal amount in RM">
+                <input type="range" id="principal" name="principal" min="1000" max="100000" value="50000">
+                <span id="principalValue">50000</span>
             </div>
             <div class="input-group">
                 <label for="rate">Annual Interest Rate (%):</label>
-                <input type="text" id="rate" name="rate" placeholder="Enter annual interest rate">
+                <input type="range" id="rate" name="rate" min="1" max="20" value="5" step="0.1">
+                <span id="rateValue">5</span>
             </div>
             <div class="input-group">
                 <label for="years">Loan Term (Years):</label>
-                <input type="text" id="years" name="years" placeholder="Enter loan term in years">
+                <input type="range" id="years" name="years" min="1" max="30" value="15">
+                <span id="yearsValue">15</span>
             </div>
             <button type="button" class="button" onclick="calculateInterest()">Calculate</button>
         </form>
@@ -136,6 +161,19 @@
                 <strong>Total Monthly Payment:</strong> RM${monthlyPayment.toFixed(2)}
             `;
         }
+
+        // Update slider values dynamically
+        document.getElementById('principal').addEventListener('input', function() {
+            document.getElementById('principalValue').textContent = this.value;
+        });
+
+        document.getElementById('rate').addEventListener('input', function() {
+            document.getElementById('rateValue').textContent = this.value;
+        });
+
+        document.getElementById('years').addEventListener('input', function() {
+            document.getElementById('yearsValue').textContent = this.value;
+        });
     </script>
 </body>
 </html>
