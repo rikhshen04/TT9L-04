@@ -111,3 +111,31 @@
         <p id="result"></p>
         <a href="homepage.html" class="small-button">Back to Home</a>
     </div>
+
+    <script>
+        function calculateInterest() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const rate = parseFloat(document.getElementById('rate').value);
+            const years = parseFloat(document.getElementById('years').value);
+
+            if (isNaN(principal) || isNaN(rate) || isNaN(years)) {
+                document.getElementById('result').innerText = 'Please enter valid values';
+                return;
+            }
+
+            // Monthly interest rate
+            const monthlyRate = rate / 100 / 12;
+
+            // Number of payments (months)
+            const totalPayments = years * 12;
+
+            // Monthly payment (EMI) calculation
+            const monthlyPayment = (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -totalPayments));
+
+            document.getElementById('result').innerHTML = `
+                <strong>Total Monthly Payment:</strong> RM${monthlyPayment.toFixed(2)}
+            `;
+        }
+    </script>
+</body>
+</html>
