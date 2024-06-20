@@ -9,3 +9,4 @@ root.title("Tax Calculator")
 root.geometry("900x700")
 
 # Enable resizing
+root.resizable(True, True)
