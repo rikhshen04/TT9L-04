@@ -48,3 +48,14 @@ class BillManagerApp:
     def add_bill(self):
         bill_name = self.bill_name_entry.get()
         due_date = self.due_date_entry.get()
+
+         # Validate inputs
+        if not bill_name.strip() or not due_date.strip():
+            messagebox.showerror("Error", "Please enter both bill name and due date.")
+            return
+        
+        try:
+            due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
+        except ValueError:
+            messagebox.showerror("Error", "Invalid date format. Please enter date as YYYY-MM-DD.")
+            return
