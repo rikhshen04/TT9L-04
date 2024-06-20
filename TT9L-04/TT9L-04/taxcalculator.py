@@ -4,3 +4,4 @@ from tkinter import messagebox
 import math
 
 # Create the main application window
+root = tk.Tk()
