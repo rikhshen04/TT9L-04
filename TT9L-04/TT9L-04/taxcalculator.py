@@ -7,3 +7,5 @@ import math
 root = tk.Tk()
 root.title("Tax Calculator")
 root.geometry("900x700")
+
+# Enable resizing
