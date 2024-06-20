@@ -64,3 +64,33 @@ class LoanCalculator:
         self.result_label = ttk.Label(container, text="Total Monthly Payment: RM0.00", font=('Arial', 14))
         self.result_label.grid(row=8, column=0, columnspan=2, pady=10)
 
+    def calculate_interest(self):
+        try:
+            principal = float(self.principal_scale.get())
+            rate = float(self.rate_scale.get())
+            years = float(self.years_scale.get())
+
+            # Monthly interest rate
+            monthly_rate = rate / 100 / 12
+
+            # Number of payments (months)
+            total_payments = years * 12
+
+            # Monthly payment (EMI) calculation
+            monthly_payment = (principal * monthly_rate) / (1 - (1 + monthly_rate) ** -total_payments)
+
+            self.result_label.config(text=f"Total Monthly Payment: RM{monthly_payment:.2f}")
+        except Exception as e:
+            self.result_label.config(text="Error: Invalid input")
+
+    def update_and_calculate(self, scale, label):
+        value = scale.get()
+        label.config(text=f"{value:.0f}")
+        self.calculate_interest()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = LoanCalculator(root)
+    root.mainloop()
+
+
