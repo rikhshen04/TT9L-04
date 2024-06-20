@@ -23,3 +23,8 @@ class BudgetCalculator:
         self.style.configure('TLabel', background='#f8f9fa', foreground='#495057', font=('Arial', 12))
         self.style.configure('TButton', background='#007bff', foreground='white', font=('Arial', 12), padding=10)
         self.style.configure('TEntry', fieldbackground='#fff', font=('Arial', 12))
+
+    def create_widgets(self):
+        self.canvas = tk.Canvas(self.root)
+        self.scrollbar = ttk.Scrollbar(self.root, orient="vertical", command=self.canvas.yview)
+        self.scrollable_frame = ttk.Frame(self.canvas)
