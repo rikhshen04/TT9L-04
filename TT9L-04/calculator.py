@@ -172,3 +172,8 @@ class BudgetCalculator:
         c.drawString(30, y, f"Remaining Salary: RM{self.remaining_salary:.2f}")
 
         c.save()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = BudgetCalculator(root)
+    root.mainloop()
