@@ -111,3 +111,33 @@ class BudgetCalculator:
 
         except ValueError as e:
             messagebox.showerror("Error", f"Invalid input: {e}")
+
+    def create_pie_chart(self, expenses):
+        labels, sizes = zip(*expenses.items())
+        fig, ax = plt.subplots()
+
+        # Plot pie chart with automatic percentage labels and avoiding overlap
+        wedges, texts, autotexts = ax.pie(
+            sizes,
+            labels=labels,
+            autopct=lambda pct: f"{pct:.1f}%\n" if pct > 5 else "",
+            startangle=140,
+            colors=plt.cm.Paired(range(len(expenses)))
+        )
+
+        ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle
+        ax.set_title("Expense Distribution", fontsize=14)
+
+        # Beautify the pie chart text
+        plt.setp(texts, size=10, weight="bold")
+        plt.setp(autotexts, size=8, weight="bold", color="white")
+
+        # Clear existing widgets in chart_frame if any
+        if self.chart_frame.winfo_children():
+            for widget in self.chart_frame.winfo_children():
+                widget.destroy()
+
+        # Create and draw new chart
+        canvas = FigureCanvasTkAgg(fig, master=self.chart_frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
