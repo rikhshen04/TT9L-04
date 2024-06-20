@@ -15,3 +15,13 @@ class ExpenseTrackerApp:
         if not os.path.exists(self.database_file):
             with open(self.database_file, "w") as file:
                 file.write("")
+
+        self.style_widgets()  # Apply custom styles
+
+        self.login_frame = tk.Frame(self.root, bg="#f0f0f0")
+        self.create_login_frame()
+
+        self.register_frame = tk.Frame(self.root, bg="#f0f0f0")
+        self.create_register_frame()
+
+        self.login_frame.pack()
