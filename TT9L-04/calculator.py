@@ -17,3 +17,9 @@ class BudgetCalculator:
         self.setup_styles()
         self.create_widgets()
         self.pack_widgets()
+
+    def setup_styles(self):
+        self.style = ttk.Style()
+        self.style.configure('TLabel', background='#f8f9fa', foreground='#495057', font=('Arial', 12))
+        self.style.configure('TButton', background='#007bff', foreground='white', font=('Arial', 12), padding=10)
+        self.style.configure('TEntry', fieldbackground='#fff', font=('Arial', 12))
