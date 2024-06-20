@@ -86,3 +86,8 @@ class BillManagerApp:
                 new_text = current_text + " (Paid)"
             self.bill_list.delete(selected_bill_index)
             self.bill_list.insert(selected_bill_index, new_text)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = BillManagerApp(root)
+    root.mainloop()
