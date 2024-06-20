@@ -89,3 +89,10 @@ class BudgetCalculator:
                 self.extract_expense_data(text)
             except Exception as e:
                 messagebox.showerror("Error", f"Could not process image: {e}")
+            
+    def extract_expense_data(self, text):
+        lines = text.split('\n')
+        amount = sum(float(match.group(1)) for line in lines if (match := re.search(r'RM(\d+\.\d{2})', line)))
+        self.entries["groceries"].delete(0, tk.END)
+        self.entries["groceries"].insert(0, str(amount))
+        self.result_label.config(text=f"Extracted amount: RM{amount:.2f}")
