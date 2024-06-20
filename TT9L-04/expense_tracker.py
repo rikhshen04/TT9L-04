@@ -25,3 +25,7 @@ class ExpenseTrackerApp:
         self.create_register_frame()
 
         self.login_frame.pack()
+
+    def style_widgets(self):
+        self.root.configure(bg="#343a40")  # Dark background for the root window
+        self.root.option_add('*Font', 'Helvetica 12')  # Global font setting
