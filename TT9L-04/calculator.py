@@ -67,3 +67,12 @@ class BudgetCalculator:
 
         self.calculate_button = ttk.Button(self.scrollable_frame, text="Calculate", command=self.calculate_budget, style='TButton')
         self.calculate_button.pack(pady=10)
+
+        self.result_label = ttk.Label(self.scrollable_frame, text="", font=('Arial', 14))
+        self.result_label.pack(pady=10)
+
+        self.chart_frame = ttk.Frame(self.scrollable_frame)
+        self.chart_frame.pack(pady=20, fill='both', expand=True)
+
+        self.pdf_button = ttk.Button(self.scrollable_frame, text="Download PDF Report", command=self.download_pdf, style='TButton')
+        self.pdf_button.pack(pady=10)
