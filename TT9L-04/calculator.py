@@ -13,3 +13,7 @@ class BudgetCalculator:
         self.root = root
         self.root.title("Budget Calculator")
         self.root.geometry("600x800")
+
+        self.setup_styles()
+        self.create_widgets()
+        self.pack_widgets()
