@@ -49,17 +49,17 @@ class BillManagerApp:
         bill_name = self.bill_name_entry.get()
         due_date = self.due_date_entry.get()
 
-         # Validate inputs
+        # Validate inputs
         if not bill_name.strip() or not due_date.strip():
             messagebox.showerror("Error", "Please enter both bill name and due date.")
             return
-        
+
         try:
             due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
         except ValueError:
             messagebox.showerror("Error", "Invalid date format. Please enter date as YYYY-MM-DD.")
             return
-        
+
         current_date = datetime.now().date()
         if due_date_obj.date() < current_date:
             messagebox.showerror("Error", "Due date cannot be in the past.")
@@ -76,10 +76,10 @@ class BillManagerApp:
         self.bill_name_entry.delete(0, tk.END)
         self.due_date_entry.delete(0, tk.END)
 
-        def mark_as_paid(self, event):
-            selected_bill_index = self.bill_list.curselection()
-            if selected_bill_index:
-                 current_text = self.bill_list.get(selected_bill_index)
+    def mark_as_paid(self, event):
+        selected_bill_index = self.bill_list.curselection()
+        if selected_bill_index:
+            current_text = self.bill_list.get(selected_bill_index)
             if "(Paid)" in current_text:
                 new_text = current_text.replace(" (Paid)", "")
             else:
