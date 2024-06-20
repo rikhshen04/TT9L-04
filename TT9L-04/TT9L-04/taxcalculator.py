@@ -5,3 +5,4 @@ import math
 
 # Create the main application window
 root = tk.Tk()
+root.title("Tax Calculator")
