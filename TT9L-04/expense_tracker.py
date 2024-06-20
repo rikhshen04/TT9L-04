@@ -70,3 +70,23 @@ class ExpenseTrackerApp:
                     return
 
         messagebox.showerror("Login Failed", "Incorrect Username or Password")
+
+    def register(self):
+        username = self.register_username_entry.get()
+        password = self.register_password_entry.get()
+
+        if not username or not password:  
+            messagebox.showerror("Register Failed", "Username and Password cannot be empty")
+            return
+
+        with open(self.database_file, "r") as file:
+            for line in file:
+                a, b = line.strip().split(",")
+                if a == username:
+                    messagebox.showerror("Register Failed", "Username already exists")
+                    return
+
+        with open(self.database_file, "a") as file:
+            file.write(f"{username},{password}\n")
+        messagebox.showinfo("Register", "You have been registered!")
+        self.show_login_page()
