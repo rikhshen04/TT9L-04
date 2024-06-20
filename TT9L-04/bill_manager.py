@@ -44,3 +44,7 @@ class BillManagerApp:
         self.scrollbar.config(command=self.bill_list.yview)
 
         self.bill_list.bind("<Double-Button-1>", self.mark_as_paid)
+
+    def add_bill(self):
+        bill_name = self.bill_name_entry.get()
+        due_date = self.due_date_entry.get()
