@@ -141,3 +141,34 @@ class BudgetCalculator:
         canvas = FigureCanvasTkAgg(fig, master=self.chart_frame)
         canvas.draw()
         canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+    def download_pdf(self):
+        file_path = filedialog.asksaveasfilename(defaultextension=".pdf", filetypes=[("PDF files", "*.pdf")])
+        if file_path:
+            try:
+                self.create_pdf(file_path)
+                messagebox.showinfo("Success", "PDF report generated successfully!")
+            except Exception as e:
+                messagebox.showerror("Error", f"Could not create PDF: {e}")
+
+    def create_pdf(self, file_path):
+        c = canvas.Canvas(file_path, pagesize=letter)
+        width, height = letter
+
+        c.setFont("Helvetica", 14)
+        c.drawString(30, height - 30, "Budget Calculator Report")
+        
+        c.setFont("Helvetica", 12)
+        c.drawString(30, height - 60, f"Monthly Salary: RM{self.entries['salary'].get()}")
+
+        y = height - 90
+        for label_text, var_name in self.input_fields:
+            if var_name != "salary":
+                c.drawString(30, y, f"{label_text} {self.entries[var_name].get()}")
+                y -= 20
+
+        c.drawString(30, y, f"Total Expenses: RM{self.total_expenses:.2f}")
+        y -= 20
+        c.drawString(30, y, f"Remaining Salary: RM{self.remaining_salary:.2f}")
+
+        c.save()
