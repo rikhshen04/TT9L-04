@@ -76,3 +76,16 @@ class BudgetCalculator:
 
         self.pdf_button = ttk.Button(self.scrollable_frame, text="Download PDF Report", command=self.download_pdf, style='TButton')
         self.pdf_button.pack(pady=10)
+
+    def pack_widgets(self):
+        self.canvas.pack(side="left", fill="both", expand=True)
+        self.scrollbar.pack(side="right", fill="y")
+
+    def process_receipt(self):
+        file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.jpeg *.png")])
+        if file_path:
+            try:
+                text = pytesseract.image_to_string(Image.open(file_path))
+                self.extract_expense_data(text)
+            except Exception as e:
+                messagebox.showerror("Error", f"Could not process image: {e}")
