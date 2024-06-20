@@ -47,3 +47,20 @@ class LoanCalculator:
         self.rate_scale.set(5)
         self.rate_scale.grid(row=4, column=0, columnspan=2, sticky=(tk.W, tk.E))
 
+         # Years input
+        years_label = ttk.Label(container, text="Loan Term (Years):")
+        years_label.grid(row=5, column=0, sticky=tk.W)
+        self.years_value_label = ttk.Label(container, text="15")
+        self.years_value_label.grid(row=5, column=1, sticky=tk.E)
+        self.years_scale = ttk.Scale(container, from_=1, to=30, orient=tk.HORIZONTAL, command=lambda val: self.update_and_calculate(self.years_scale, self.years_value_label))
+        self.years_scale.set(15)
+        self.years_scale.grid(row=6, column=0, columnspan=2, sticky=(tk.W, tk.E))
+
+        # Calculate button
+        calculate_button = ttk.Button(container, text="Calculate", command=self.calculate_interest, style='TButton')
+        calculate_button.grid(row=7, column=0, columnspan=2, pady=20)
+
+        # Result label
+        self.result_label = ttk.Label(container, text="Total Monthly Payment: RM0.00", font=('Arial', 14))
+        self.result_label.grid(row=8, column=0, columnspan=2, pady=10)
+
