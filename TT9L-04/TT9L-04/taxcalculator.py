@@ -13,3 +13,4 @@ root.resizable(True, True)
 
 # Styles
 style = ttk.Style()
+style.configure("TButton", padding=6, relief="flat", background="#1f77b4", foreground="#ffffff")
