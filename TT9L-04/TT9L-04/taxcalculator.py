@@ -12,3 +12,4 @@ root.geometry("900x700")
 root.resizable(True, True)
 
 # Styles
+style = ttk.Style()
