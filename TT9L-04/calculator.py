@@ -61,3 +61,9 @@ class BudgetCalculator:
             entry = ttk.Entry(self.scrollable_frame, style='TEntry')
             entry.pack(fill='x', padx=10, pady=5)
             self.entries[var_name] = entry
+
+        self.receipt_button = ttk.Button(self.scrollable_frame, text="Upload Receipt", command=self.process_receipt, style='TButton')
+        self.receipt_button.pack(pady=10)
+
+        self.calculate_button = ttk.Button(self.scrollable_frame, text="Calculate", command=self.calculate_budget, style='TButton')
+        self.calculate_button.pack(pady=10)
