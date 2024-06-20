@@ -17,3 +17,5 @@ style.configure("TButton", padding=6, relief="flat", background="#1f77b4", foreg
 style.configure("TFrame", background="#f0f0f0")
 style.configure("TLabel", background="#f0f0f0", font=("Arial", 12))
 style.configure("TEntry", font=("Arial", 12))
+style.configure("Treeview", font=("Arial", 10))
+style.configure("Treeview.Heading", font=("Arial", 12, "bold"))
