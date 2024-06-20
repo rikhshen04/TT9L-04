@@ -35,3 +35,29 @@ class BudgetCalculator:
                 scrollregion=self.canvas.bbox("all")
             )
         )
+
+        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
+
+        self.title_label = ttk.Label(self.scrollable_frame, text="Welcome to the Budget Calculator!", font=('Arial', 20))
+        self.title_label.pack(pady=20)
+
+        self.input_fields = [
+            ("Monthly Salary (RM):", "salary"),
+            ("House Loan (RM):", "house_loan"),
+            ("Entertainment (RM):", "entertainment"),
+            ("Car Loan (RM):", "car_loan"),
+            ("Insurance (RM):", "insurance"),
+            ("Utilities (RM):", "utilities"),
+            ("Groceries (RM):", "groceries"),
+            ("Savings (RM):", "savings"),
+            ("Bills (RM):", "bills")
+        ]
+
+        self.entries = {}
+        for label_text, var_name in self.input_fields:
+            label = ttk.Label(self.scrollable_frame, text=label_text)
+            label.pack(anchor='w', padx=10, pady=5)
+            entry = ttk.Entry(self.scrollable_frame, style='TEntry')
+            entry.pack(fill='x', padx=10, pady=5)
+            self.entries[var_name] = entry
