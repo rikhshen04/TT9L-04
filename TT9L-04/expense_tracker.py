@@ -40,3 +40,14 @@ class ExpenseTrackerApp:
         self.login_password_entry.pack(pady=5)
         tk.Button(self.login_frame, text="Login", font=self.large_font, command=self.login, width=15, height=2, bg="#28a745", fg="white").pack(pady=10)
         tk.Button(self.login_frame, text="Register", font=self.large_font, command=self.show_register_page, width=15, height=2, bg="#007bff", fg="white").pack(pady=5)
+
+    def create_register_frame(self):
+        tk.Label(self.register_frame, text="Register", font=('Helvetica', 20), bg="#f0f0f0").pack(pady=10)
+        tk.Label(self.register_frame, text="Username", font=self.large_font, bg="#f0f0f0").pack(pady=5)
+        self.register_username_entry = tk.Entry(self.register_frame, font=self.large_font, width=20)
+        self.register_username_entry.pack(pady=5)
+        tk.Label(self.register_frame, text="Password", font=self.large_font, bg="#f0f0f0").pack(pady=5)
+        self.register_password_entry = tk.Entry(self.register_frame, show='*', font=self.large_font, width=20)
+        self.register_password_entry.pack(pady=5)
+        tk.Button(self.register_frame, text="Register", font=self.large_font, command=self.register, width=15, height=2, bg="#007bff", fg="white").pack(pady=10)
+        tk.Button(self.register_frame, text="Back to Login", font=self.large_font, command=self.show_login_page, width=15, height=2, bg="#6c757d", fg="white").pack(pady=5)
