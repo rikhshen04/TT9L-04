@@ -59,3 +59,11 @@ class BillManagerApp:
         except ValueError:
             messagebox.showerror("Error", "Invalid date format. Please enter date as YYYY-MM-DD.")
             return
+        
+        current_date = datetime.now().date()
+        if due_date_obj.date() < current_date:
+            messagebox.showerror("Error", "Due date cannot be in the past.")
+            return
+
+        days_left = (due_date_obj.date() - current_date).days
+        days_left_text = f"{days_left} day(s) left" if days_left > 0 else "Due today"
