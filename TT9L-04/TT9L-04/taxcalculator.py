@@ -27,3 +27,11 @@ tax_brackets = [
     (30000, 100000, 0.2),  # 20% for income between $30,000 and $100,000
     (100000, float('inf'), 0.25)  # 25% for income above $100,000
 ]
+
+# Frames
+frame_input = ttk.Frame(root, padding="10 10 10 10")
+frame_input.grid(row=0, column=0, sticky="ew", padx=10, pady=10)
+frame_result = ttk.Frame(root, padding="10 10 10 10")
+frame_result.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
+frame_chart = ttk.Frame(root, padding="10 10 10 10")
+frame_chart.grid(row=0, column=1, rowspan=2, sticky="nsew", padx=10, pady=10)
