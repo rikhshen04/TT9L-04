@@ -35,3 +35,9 @@ class Dashboard(tk.Frame):
         loan_calculator_window.title("Loan Calculator")
         loan_calculator_window.geometry("500x500")
         loan_calculator_app = LoanCalculator(loan_calculator_window)
+
+    def logout(self):
+        self.pack_forget()
+        self.master.title("Login")
+        self.master.geometry("500x400")
+        self.master.login_frame.pack(fill="both", expand=True)
