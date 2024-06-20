@@ -29,3 +29,21 @@ class LoanCalculator:
         title_label = ttk.Label(container, text="Calculate Loan Interest", font=('Arial', 24))
         title_label.grid(row=0, column=0, columnspan=2, pady=10)
 
+        # Principal input
+        principal_label = ttk.Label(container, text="Principal Amount (RM):")
+        principal_label.grid(row=1, column=0, sticky=tk.W)
+        self.principal_value_label = ttk.Label(container, text="50000")
+        self.principal_value_label.grid(row=1, column=1, sticky=tk.E)
+        self.principal_scale = ttk.Scale(container, from_=1000, to=100000, orient=tk.HORIZONTAL, command=lambda val: self.update_and_calculate(self.principal_scale, self.principal_value_label))
+        self.principal_scale.set(50000)
+        self.principal_scale.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E))
+
+        # Rate input
+        rate_label = ttk.Label(container, text="Annual Interest Rate (%):")
+        rate_label.grid(row=3, column=0, sticky=tk.W)
+        self.rate_value_label = ttk.Label(container, text="5")
+        self.rate_value_label.grid(row=3, column=1, sticky=tk.E)
+        self.rate_scale = ttk.Scale(container, from_=1, to=20, orient=tk.HORIZONTAL, command=lambda val: self.update_and_calculate(self.rate_scale, self.rate_value_label))
+        self.rate_scale.set(5)
+        self.rate_scale.grid(row=4, column=0, columnspan=2, sticky=(tk.W, tk.E))
+
