@@ -96,3 +96,18 @@ class BudgetCalculator:
         self.entries["groceries"].delete(0, tk.END)
         self.entries["groceries"].insert(0, str(amount))
         self.result_label.config(text=f"Extracted amount: RM{amount:.2f}")
+
+    def calculate_budget(self):
+        try:
+            salary = float(self.entries["salary"].get())
+            self.expenses = {key: float(entry.get() or 0) for key, entry in self.entries.items() if key != "salary"}
+
+            self.total_expenses = sum(self.expenses.values())
+            self.remaining_salary = salary - self.total_expenses
+
+            self.result_label.config(text=f"Total Expenses: RM{self.total_expenses:.2f}\nRemaining Salary: RM{self.remaining_salary:.2f}")
+
+            self.create_pie_chart(self.expenses)
+
+        except ValueError as e:
+            messagebox.showerror("Error", f"Invalid input: {e}")
