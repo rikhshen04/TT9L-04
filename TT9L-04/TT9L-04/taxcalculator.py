@@ -19,3 +19,11 @@ style.configure("TLabel", background="#f0f0f0", font=("Arial", 12))
 style.configure("TEntry", font=("Arial", 12))
 style.configure("Treeview", font=("Arial", 10))
 style.configure("Treeview.Heading", font=("Arial", 12, "bold"))
+
+# Tax brackets
+tax_brackets = [
+    (0, 10000, 0.1),    # 10% for income up to $10,000
+    (10000, 30000, 0.15),  # 15% for income between $10,000 and $30,000
+    (30000, 100000, 0.2),  # 20% for income between $30,000 and $100,000
+    (100000, float('inf'), 0.25)  # 25% for income above $100,000
+]
