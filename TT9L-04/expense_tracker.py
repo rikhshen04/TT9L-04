@@ -51,3 +51,22 @@ class ExpenseTrackerApp:
         self.register_password_entry.pack(pady=5)
         tk.Button(self.register_frame, text="Register", font=self.large_font, command=self.register, width=15, height=2, bg="#007bff", fg="white").pack(pady=10)
         tk.Button(self.register_frame, text="Back to Login", font=self.large_font, command=self.show_login_page, width=15, height=2, bg="#6c757d", fg="white").pack(pady=5)
+
+    def login(self):
+        username = self.login_username_entry.get()
+        password = self.login_password_entry.get()
+
+        if not username or not password:  
+            messagebox.showerror("Login Failed", "Check Username and Password")
+            return
+
+        with open(self.database_file, "r") as file:
+            for line in file:
+                a, b = line.strip().split(",")
+                if a == username and b == password:
+                    messagebox.showinfo("Login", "Login successful!")
+                    self.login_frame.pack_forget()
+                    self.open_dashboard()
+                    return
+
+        messagebox.showerror("Login Failed", "Incorrect Username or Password")
