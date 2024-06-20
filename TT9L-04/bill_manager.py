@@ -67,3 +67,11 @@ class BillManagerApp:
 
         days_left = (due_date_obj.date() - current_date).days
         days_left_text = f"{days_left} day(s) left" if days_left > 0 else "Due today"
+
+        # Add bill to list
+        bill_info = f"{bill_name}: Due on {due_date} ({days_left_text})"
+        self.bill_list.insert(tk.END, bill_info)
+
+        # Clear input fields after adding the bill
+        self.bill_name_entry.delete(0, tk.END)
+        self.due_date_entry.delete(0, tk.END)
