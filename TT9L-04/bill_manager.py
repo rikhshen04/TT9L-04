@@ -75,3 +75,14 @@ class BillManagerApp:
         # Clear input fields after adding the bill
         self.bill_name_entry.delete(0, tk.END)
         self.due_date_entry.delete(0, tk.END)
+
+        def mark_as_paid(self, event):
+            selected_bill_index = self.bill_list.curselection()
+            if selected_bill_index:
+                 current_text = self.bill_list.get(selected_bill_index)
+            if "(Paid)" in current_text:
+                new_text = current_text.replace(" (Paid)", "")
+            else:
+                new_text = current_text + " (Paid)"
+            self.bill_list.delete(selected_bill_index)
+            self.bill_list.insert(selected_bill_index, new_text)
