@@ -7,3 +7,9 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+
+class BudgetCalculator:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Budget Calculator")
+        self.root.geometry("600x800")
