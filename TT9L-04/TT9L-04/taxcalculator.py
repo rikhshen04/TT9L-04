@@ -60,3 +60,9 @@ credits_entry.grid(row=2, column=1)
 ttk.Label(frame_input, text="Previous Year Tax:").grid(row=3, column=0, sticky="w")
 previous_tax_entry = ttk.Entry(frame_input)
 previous_tax_entry.grid(row=3, column=1)
+
+# Summary display
+summary_tree = ttk.Treeview(frame_result, columns=("Description", "Amount"), show="headings")
+summary_tree.heading("Description", text="Description")
+summary_tree.heading("Amount", text="Amount")
+summary_tree.grid(row=0, column=0, sticky="nsew")
