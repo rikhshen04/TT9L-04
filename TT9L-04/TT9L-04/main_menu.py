@@ -151,3 +151,23 @@ class Budgetcalculator:
 
         if not found:
             messagebox.showerror("Login Failed", "Check Username and Password")
+
+    def register(self):
+        username = self.register_username_entry.get()
+        password = self.register_password_entry.get()
+
+        if not username or not password:
+            messagebox.showerror("Register Failed", "Username and Password cannot be empty")
+            return
+
+        with open(self.database_file, "r") as file:
+            for line in file:
+                stored_username, _, _ = line.strip().split(",")
+                if stored_username == username:
+                    messagebox.showerror("Register Failed", "Username already exists")
+                    return
+
+        with open(self.database_file, "a") as file:
+            file.write(f"{username},{password},0\n")
+        messagebox.showinfo("Register", "You have been registered!")
+        self.show_login_page()
