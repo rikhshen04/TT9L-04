@@ -43,3 +43,20 @@ frame_result.grid_rowconfigure(0, weight=1)
 frame_result.grid_columnconfigure(0, weight=1)
 frame_chart.grid_rowconfigure(0, weight=1)
 frame_chart.grid_columnconfigure(0, weight=1)
+
+# Input fields
+ttk.Label(frame_input, text="Annual Income:").grid(row=0, column=0, sticky="w")
+income_entry = ttk.Entry(frame_input)
+income_entry.grid(row=0, column=1)
+
+ttk.Label(frame_input, text="Deductions:").grid(row=1, column=0, sticky="w")
+deductions_entry = ttk.Entry(frame_input)
+deductions_entry.grid(row=1, column=1)
+
+ttk.Label(frame_input, text="Tax Credits:").grid(row=2, column=0, sticky="w")
+credits_entry = ttk.Entry(frame_input)
+credits_entry.grid(row=2, column=1)
+
+ttk.Label(frame_input, text="Previous Year Tax:").grid(row=3, column=0, sticky="w")
+previous_tax_entry = ttk.Entry(frame_input)
+previous_tax_entry.grid(row=3, column=1)
