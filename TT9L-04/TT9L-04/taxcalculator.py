@@ -71,3 +71,7 @@ summary_tree.grid(row=0, column=0, sticky="nsew")
 scrollbar = ttk.Scrollbar(frame_result, orient="vertical", command=summary_tree.yview)
 summary_tree.configure(yscroll=scrollbar.set)
 scrollbar.grid(row=0, column=1, sticky="ns")
+
+# Chart
+chart_canvas = tk.Canvas(frame_chart, width=400, height=400, background="#ffffff")
+chart_canvas.grid(row=0, column=0, sticky="nsew")
