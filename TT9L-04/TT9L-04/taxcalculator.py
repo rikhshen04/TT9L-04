@@ -102,3 +102,11 @@ def calculate_tax():
         
     except ValueError as e:
         messagebox.showerror("Invalid Input", f"Error: {e}")
+
+def update_summary(taxable_income, tax_due, final_tax, tax_savings):
+    for row in summary_tree.get_children():
+        summary_tree.delete(row)
+    summary_tree.insert("", "end", values=("Taxable Income", f"${taxable_income:.2f}"))
+    summary_tree.insert("", "end", values=("Tax Due Before Credits", f"${tax_due:.2f}"))
+    summary_tree.insert("", "end", values=("Final Tax Due", f"${final_tax:.2f}"))
+    summary_tree.insert("", "end", values=("Tax Savings Compared to Last Year", f"${tax_savings:.2f}"))
