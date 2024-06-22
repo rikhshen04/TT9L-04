@@ -196,3 +196,21 @@ class Budgetcalculator:
             messagebox.showinfo("Congratulations!", f"You have reached {self.points} points! Keep up the great work!\n\nSaving Tip: {saving_tip}")
 
         self.view_expenses()  # Load user-specific expenses
+
+    def add_expense(self):
+        description = self.expense_description_entry.get()
+        amount = self.expense_amount_entry.get()
+
+        if not description or not amount:
+            messagebox.showerror("Error", "Description and Amount cannot be empty")
+            return
+
+        # Use user-specific expense file
+        expense_file = f"{self.current_user}_expenses.txt"
+
+        with open(expense_file, "a") as file:
+            file.write(f"{description},{amount}\n")
+        messagebox.showinfo("Success", "Expense added successfully!")
+        self.expense_description_entry.delete(0, tk.END)
+        self.expense_amount_entry.delete(0, tk.END)
+        self.view_expenses()
