@@ -249,3 +249,24 @@ class Budgetcalculator:
                 else:
                     file.write(line)
         messagebox.showinfo("Success", "Expense updated successfully!")
+
+    def delete_expense(self):
+        selected = self.expense_listbox.curselection()
+        if not selected:
+            messagebox.showerror("Error", "Please select an expense to delete")
+            return
+
+        index = selected[0]
+
+        # Use user-specific expense file
+        expense_file = f"{self.current_user}_expenses.txt"
+
+        with open(expense_file, "r") as file:
+            lines = file.readlines()
+
+        with open(expense_file, "w") as file:
+            for i, line in enumerate(lines):
+                if i != index:
+                    file.write(line)
+        messagebox.showinfo("Success", "Expense deleted successfully!")
+        self.view_expenses()
