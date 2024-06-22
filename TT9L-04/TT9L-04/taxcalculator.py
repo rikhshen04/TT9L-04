@@ -66,3 +66,8 @@ summary_tree = ttk.Treeview(frame_result, columns=("Description", "Amount"), sho
 summary_tree.heading("Description", text="Description")
 summary_tree.heading("Amount", text="Amount")
 summary_tree.grid(row=0, column=0, sticky="nsew")
+
+# Scrollbar for the summary
+scrollbar = ttk.Scrollbar(frame_result, orient="vertical", command=summary_tree.yview)
+summary_tree.configure(yscroll=scrollbar.set)
+scrollbar.grid(row=0, column=1, sticky="ns")
