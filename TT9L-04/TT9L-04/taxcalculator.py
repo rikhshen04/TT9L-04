@@ -141,3 +141,6 @@ def update_chart(income, deductions, final_tax):
 # Calculate button
 calculate_button = ttk.Button(frame_input, text="Calculate Tax", command=calculate_tax)
 calculate_button.grid(row=4, column=0, columnspan=2, pady=10)
+
+# Run the application
+root.mainloop()
