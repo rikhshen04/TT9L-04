@@ -73,3 +73,22 @@ class Budgetcalculator:
         self.register_password_entry.pack(pady=5)
         tk.Button(self.register_frame, text="Register", font=self.large_font, command=self.register, width=15, height=2, bg="#007bff", fg="white").pack(pady=10)
         tk.Button(self.register_frame, text="Back to Login", font=self.large_font, command=self.show_login_page, width=15, height=2, bg="#6c757d", fg="white").pack(pady=5)
+
+    def create_dashboard_frame(self):
+        tk.Label(self.dashboard_frame, text="Expense Tracker", font=('Helvetica', 20), bg="#f0f0f0").pack(pady=10)
+
+        self.points_label = tk.Label(self.dashboard_frame, text="Points: 0", font=self.medium_font, bg="#f0f0f0")
+        self.points_label.pack(anchor='ne', padx=10, pady=5)
+
+        self.expense_listbox = tk.Listbox(self.dashboard_frame, font=self.medium_font, width=50, height=10)
+        self.expense_listbox.pack(pady=10)
+
+        self.expense_entry_frame = tk.Frame(self.dashboard_frame, bg="#f0f0f0")
+        tk.Label(self.expense_entry_frame, text="Description", font=self.medium_font, bg="#f0f0f0").grid(row=0, column=0, padx=5, pady=5)
+        self.expense_description_entry = tk.Entry(self.expense_entry_frame, font=self.medium_font, width=20)
+        self.expense_description_entry.grid(row=0, column=1, padx=5, pady=5)
+        tk.Label(self.expense_entry_frame, text="Amount", font=self.medium_font, bg="#f0f0f0").grid(row=1, column=0, padx=5, pady=5)
+        self.expense_amount_entry = tk.Entry(self.expense_entry_frame, font=self.medium_font, width=20)
+        self.expense_amount_entry.grid(row=1, column=1, padx=5, pady=5)
+        tk.Button(self.expense_entry_frame, text="Add Expense", font=self.medium_font, command=self.add_expense, bg="#28a745", fg="white").grid(row=2, columnspan=2, pady=10)
+        self.expense_entry_frame.pack(pady=10)
