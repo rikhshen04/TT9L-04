@@ -284,3 +284,8 @@ class Budgetcalculator:
         self.dashboard_frame.pack_forget()
         self.login_frame.pack()
         self.current_user = None  # Clear current user
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = BudgetCalculator(root)
+    root.mainloop()
