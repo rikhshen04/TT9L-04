@@ -47,3 +47,7 @@ class Budgetcalculator:
             "Tip 9: Buy generic brands instead of name brands.",
             "Tip 10: Save energy by turning off lights and electronics when not in use."
         ]
+
+    def style_widgets(self):
+        self.root.configure(bg="#343a40")  # Dark background for the root window
+        self.root.option_add('*Font', 'Helvetica 12')  # Global font setting
