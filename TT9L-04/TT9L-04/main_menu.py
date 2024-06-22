@@ -117,3 +117,9 @@ class Budgetcalculator:
         bill_manager_window.title("Bill Manager")
         bill_manager_window.geometry("600x400")
         bill_manager_app = BillManagerApp(bill_manager_window)
+
+    def open_loan_calculator(self):
+        loan_calculator_window = tk.Toplevel(self.root)
+        loan_calculator_window.title("Loan Calculator")
+        loan_calculator_window.geometry("500x400")
+        loan_calculator = LoanCalculator(loan_calculator_window)
