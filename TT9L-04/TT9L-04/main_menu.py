@@ -51,3 +51,14 @@ class Budgetcalculator:
     def style_widgets(self):
         self.root.configure(bg="#343a40")  # Dark background for the root window
         self.root.option_add('*Font', 'Helvetica 12')  # Global font setting
+
+    def create_login_frame(self):
+        tk.Label(self.login_frame, text="Login", font=('Helvetica', 20), bg="#f0f0f0").pack(pady=10)
+        tk.Label(self.login_frame, text="Username", font=self.large_font, bg="#f0f0f0").pack(pady=5)
+        self.login_username_entry = tk.Entry(self.login_frame, font=self.large_font, width=20)
+        self.login_username_entry.pack(pady=5)
+        tk.Label(self.login_frame, text="Password", font=self.large_font, bg="#f0f0f0").pack(pady=5)
+        self.login_password_entry = tk.Entry(self.login_frame, show='*', font=self.large_font, width=20)
+        self.login_password_entry.pack(pady=5)
+        tk.Button(self.login_frame, text="Login", font=self.large_font, command=self.login, width=15, height=2, bg="#28a745", fg="white").pack(pady=10)
+        tk.Button(self.login_frame, text="Register", font=self.large_font, command=self.show_register_page, width=15, height=2, bg="#007bff", fg="white").pack(pady=5)
