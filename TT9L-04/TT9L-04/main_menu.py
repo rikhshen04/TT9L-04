@@ -270,3 +270,12 @@ class Budgetcalculator:
                     file.write(line)
         messagebox.showinfo("Success", "Expense deleted successfully!")
         self.view_expenses()
+
+    def view_expenses(self):
+        self.expense_listbox.delete(0, tk.END)  # Clear the listbox first
+        # Use user-specific expense file
+        expense_file = f"{self.current_user}_expenses.txt"
+        if os.path.exists(expense_file):
+            with open(expense_file, "r") as file:
+                for line in file:
+                    self.expense_listbox.insert(tk.END, line.strip())
