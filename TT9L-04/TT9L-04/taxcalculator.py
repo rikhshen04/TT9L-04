@@ -75,3 +75,30 @@ scrollbar.grid(row=0, column=1, sticky="ns")
 # Chart
 chart_canvas = tk.Canvas(frame_chart, width=400, height=400, background="#ffffff")
 chart_canvas.grid(row=0, column=0, sticky="nsew")
+
+def calculate_tax():
+    try:
+        income = float(income_entry.get())
+        deductions = float(deductions_entry.get())
+        credits = float(credits_entry.get())
+        previous_tax = float(previous_tax_entry.get())
+        
+        taxable_income = income - deductions
+        tax_due = 0
+        
+        for lower, upper, rate in tax_brackets:
+            if taxable_income > lower:
+                if taxable_income > upper:
+                    tax_due += (upper - lower) * rate
+                else:
+                    tax_due += (taxable_income - lower) * rate
+                    break
+        
+        final_tax = max(tax_due - credits, 0)
+        tax_savings = previous_tax - final_tax
+        
+        update_summary(taxable_income, tax_due, final_tax, tax_savings)
+        update_chart(income, deductions, final_tax)
+        
+    except ValueError as e:
+        messagebox.showerror("Invalid Input", f"Error: {e}")
