@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Expenses</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('background3.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        label {
+            font-size: 1.1em;
+            flex: 1 1 40%;
+            text-align: left;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+            width: 55%;
+            box-sizing: border-box;
+            margin: 5px 0;
+        }
+        .button {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            text-align: center;
+            font-size: 1.2em;
+            margin: 20px 0;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            transition: background 0.3s ease;
+        }
+        .button:hover {
+            background: #45a049;
+        }
+        #result {
+            font-size: 1.3em;
+            margin-top: 20px;
+        }
+        #chartContainer {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculate Your Expenses</h1>
+        <form id="expenseForm">
+            <div class="input-group">
+                <label for="salary">Monthly Salary (RM):</label>
+                <input type="text" id="salary" name="salary" placeholder="Enter your salary in RM">
+            </div>
+            <div class="input-group">
+                <label for="food">Food (RM):</label>
+                <input type="text" id="food" name="food" placeholder="Enter food expenses in RM">
+            </div>
+            <div class="input-group">
+                <label for="houseLoan">House Loan (RM):</label>
+                <input type="text" id="houseLoan" name="houseLoan" placeholder="Enter house loan in RM">
+            </div>
+            <div class="input-group">
+                <label for="entertainment">Entertainment (RM):</label>
+                <input type="text" id="entertainment" name="entertainment" placeholder="Enter entertainment expenses in RM">
+            </div>
+            <div class="input-group">
+                <label for="carLoan">Car Loan (RM):</label>
+                <input type="text" id="carLoan" name="carLoan" placeholder="Enter car loan in RM">
+            </div>
+            <div class="input-group">
+                <label for="insurance">Insurance (RM):</label>
+                <input type="text" id="insurance" name="insurance" placeholder="Enter insurance costs in RM">
+            </div>
+            <div class="input-group">
+                <label for="utilities">Utilities (RM):</label>
+                <input type="text" id="utilities" name="utilities" placeholder="Enter utility costs in RM">
+            </div>
+            <div class="input-group">
+                <label for="groceries">Groceries (RM):</label>
+                <input type="text" id="groceries" name="groceries" placeholder="Enter grocery expenses in RM">
+            </div>
+            <div class="input-group">
+                <label for="savings">Savings (RM):</label>
+                <input type="text" id="savings" name="savings" placeholder="Enter savings in RM">
+            </div>
+            <div class="input-group">
+                <label for="bills">Bills (RM):</label>
+                <input type="text" id="bills" name="bills" placeholder="Enter bill costs in RM">
+            </div>
+            <button type="button" class="button" onclick="calculateExpenses()">Calculate</button>
+        </form>
+        <p id="result"></p>
+        <div id="chartContainer">
+            <canvas id="expenseChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        function calculateExpenses() {
+            const salary = parseFloat(document.getElementById('salary').value);
+            const food = parseFloat(document.getElementById('food').value) || 0;
+            const houseLoan = parseFloat(document.getElementById('houseLoan').value) || 0;
+            const entertainment = parseFloat(document.getElementById('entertainment').value) || 0;
+            const carLoan = parseFloat(document.getElementById('carLoan').value) || 0;
+            const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+            const utilities = parseFloat(document.getElementById('utilities').value) || 0;
+            const groceries = parseFloat(document.getElementById('groceries').value) || 0;
+            const savings = parseFloat(document.getElementById('savings').value) || 0;
+            const bills = parseFloat(document.getElementById('bills').value) || 0;
+
+            if (isNaN(salary)) {
+                document.getElementById('result').innerText = 'Please enter a valid salary';
+                return;
+            }
+
+            const totalExpenses = food + houseLoan + entertainment + carLoan + insurance + utilities + groceries + savings + bills;
+            const balance = salary - totalExpenses;
+
+            document.getElementById('result').innerText = `Your remaining balance is: RM${balance.toFixed(2)}`;
+
+            const ctx = document.getElementById('expenseChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Food', 'House Loan', 'Entertainment', 'Car Loan', 'Insurance', 'Utilities', 'Groceries', 'Savings', 'Bills'],
+                    datasets: [{
+                        label: 'Expenses',
+                        data: [food, houseLoan, entertainment, carLoan, insurance, utilities, groceries, savings, bills],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 206, 86, 0.8)',
+                            'rgba(75, 192, 192, 0.8)',
+                            'rgba(153, 102, 255, 0.8)',
+                            'rgba(255, 159, 64, 0.8)',
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(75, 192, 192, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.label + ': RM' + tooltipItem.raw.toFixed(2);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
