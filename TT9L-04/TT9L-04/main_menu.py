@@ -5,7 +5,7 @@ from calculator import BudgetCalculator
 from bill_manager import BillManagerApp
 from loan_calculator import LoanCalculator
 
-class Budgetcalculator:
+class ExpenseTrackerApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Expense Tracker App")
@@ -123,12 +123,6 @@ class Budgetcalculator:
         loan_calculator_window.title("Loan Calculator")
         loan_calculator_window.geometry("500x400")
         loan_calculator = LoanCalculator(loan_calculator_window)
-
-    def open_tax_calculator(self):
-        tax_calculator_window = tk.Toplevel(self.root)
-        tax_calculator_window.title("Tax Calculator")
-        tax_calculator_window.geometry("600x400")
-        tax_calculator = TaxCalculator(tax_calculator_window)
 
     def login(self):
         username = self.login_username_entry.get()
@@ -293,5 +287,5 @@ class Budgetcalculator:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = BudgetCalculator(root)
+    app = ExpenseTrackerApp(root)
     root.mainloop()
