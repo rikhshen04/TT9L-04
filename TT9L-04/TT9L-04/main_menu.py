@@ -111,3 +111,9 @@ class Budgetcalculator:
         calculator_window.title("Calculator")
         calculator_window.geometry("400x600")
         budget_calculator = BudgetCalculator(calculator_window)
+
+    def open_bill_manager(self):
+        bill_manager_window = tk.Toplevel(self.root)
+        bill_manager_window.title("Bill Manager")
+        bill_manager_window.geometry("600x400")
+        bill_manager_app = BillManagerApp(bill_manager_window)
