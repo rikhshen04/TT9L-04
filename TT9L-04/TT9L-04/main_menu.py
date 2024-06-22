@@ -105,3 +105,9 @@ class Budgetcalculator:
         tk.Button(self.tool_buttons_frame, text="Open Bill Manager", font=self.medium_font, command=self.open_bill_manager, bg="#007bff", fg="white").grid(row=0, column=1, padx=10, pady=10, ipadx=10, ipady=10)
         tk.Button(self.tool_buttons_frame, text="Open Loan Calculator", font=self.medium_font, command=self.open_loan_calculator, bg="#007bff", fg="white").grid(row=0, column=2, padx=10, pady=10, ipadx=10, ipady=10)
         self.tool_buttons_frame.pack(pady=20)
+
+    def open_calculator(self):
+        calculator_window = tk.Toplevel(self.root)
+        calculator_window.title("Calculator")
+        calculator_window.geometry("400x600")
+        budget_calculator = BudgetCalculator(calculator_window)
