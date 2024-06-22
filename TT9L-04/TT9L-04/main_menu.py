@@ -214,3 +214,23 @@ class Budgetcalculator:
         self.expense_description_entry.delete(0, tk.END)
         self.expense_amount_entry.delete(0, tk.END)
         self.view_expenses()
+
+    def edit_expense(self):
+        selected = self.expense_listbox.curselection()
+        if not selected:
+            messagebox.showerror("Error", "Please select an expense to edit")
+            return
+
+        index = selected[0]
+        current_expense = self.expense_listbox.get(index)
+        description, amount = current_expense.split(",")
+
+        new_description = simpledialog.askstring("Edit Description", "Enter new description:", initialvalue=description)
+        if new_description is None:
+            return
+        new_amount = simpledialog.askstring("Edit Amount", "Enter new amount:", initialvalue=amount)
+        if new_amount is None:
+            return
+
+        self.update_expense(index, new_description, new_amount)
+        self.view_expenses()
