@@ -33,3 +33,17 @@ class Budgetcalculator:
         self.current_user = None  # To keep track of the logged-in user
 
         self.login_frame.pack()
+
+        # List of money-saving tips
+        self.saving_tips = [
+            "Tip 1: Track your spending to identify areas where you can cut back.",
+            "Tip 2: Create a budget and stick to it.",
+            "Tip 3: Avoid impulse purchases by making a shopping list.",
+            "Tip 4: Use cash instead of credit cards to limit overspending.",
+            "Tip 5: Look for discounts and use coupons.",
+            "Tip 6: Set savings goals and work towards them consistently.",
+            "Tip 7: Cook at home instead of dining out.",
+            "Tip 8: Cancel unused subscriptions and memberships.",
+            "Tip 9: Buy generic brands instead of name brands.",
+            "Tip 10: Save energy by turning off lights and electronics when not in use."
+        ]
