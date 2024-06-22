@@ -110,3 +110,30 @@ def update_summary(taxable_income, tax_due, final_tax, tax_savings):
     summary_tree.insert("", "end", values=("Tax Due Before Credits", f"${tax_due:.2f}"))
     summary_tree.insert("", "end", values=("Final Tax Due", f"${final_tax:.2f}"))
     summary_tree.insert("", "end", values=("Tax Savings Compared to Last Year", f"${tax_savings:.2f}"))
+
+def update_chart(income, deductions, final_tax):
+    chart_canvas.delete("all")  # Clear the canvas
+
+    total = income
+    segments = {
+        "Income": income - deductions,
+        "Deductions": deductions,
+        "Tax Due": final_tax
+    }
+    colors = ["#66b3ff", "#ff9999", "#99ff99"]
+    
+    start_angle = 0
+    for i, (label, value) in enumerate(segments.items()):
+        extent = 360 * (value / total)
+        if value > 0:  # Only draw if the segment is greater than 0
+            end_angle = start_angle + extent
+            x0, y0, x1, y1 = 50, 50, 350, 350  # Bounding box for the pie
+            chart_canvas.create_arc(x0, y0, x1, y1, start=start_angle, extent=extent, fill=colors[i], outline="white")
+            
+            # Draw the text
+            mid_angle = math.radians((start_angle + end_angle) / 2)
+            text_x = 200 + 120 * math.cos(mid_angle)
+            text_y = 200 + 120 * math.sin(mid_angle)
+            chart_canvas.create_text(text_x, text_y, text=f"{label}\n${value:.2f}", fill="black", font=("Arial", 10))
+            
+            start_angle = end_angle
