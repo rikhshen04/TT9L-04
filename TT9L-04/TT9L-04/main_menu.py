@@ -123,3 +123,31 @@ class Budgetcalculator:
         loan_calculator_window.title("Loan Calculator")
         loan_calculator_window.geometry("500x400")
         loan_calculator = LoanCalculator(loan_calculator_window)
+
+    def login(self):
+        username = self.login_username_entry.get()
+        password = self.login_password_entry.get()
+
+        if not username or not password:
+            messagebox.showerror("Login Failed", "Check Username and Password")
+            return
+
+        found = False
+        with open(self.database_file, "r") as file:
+            lines = file.readlines()
+
+        for i, line in enumerate(lines):
+            stored_username, stored_password, stored_points = line.strip().split(",")
+            if username == stored_username and password == stored_password:
+                found = True
+                points = int(stored_points) + 1
+                lines[i] = f"{username},{password},{points}\n"
+                with open(self.database_file, "w") as file:
+                    file.writelines(lines)
+                self.points = points
+                self.current_user = username  # Set the current user
+                self.show_dashboard()
+                break
+
+        if not found:
+            messagebox.showerror("Login Failed", "Check Username and Password")
