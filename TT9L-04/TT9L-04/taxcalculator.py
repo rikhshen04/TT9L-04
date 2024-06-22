@@ -33,7 +33,8 @@ tax_brackets = [
     (400000, 600000, 0.25),# 25% for income between RM 400,001 and RM 600,000
     (600000, 1000000, 0.26),# 26% for income between RM 600,001 and RM 1,000,000
     (1000000, 2000000, 0.28),# 28% for income between RM 1,000,001 and RM 2,000,000
-    (2000000, float('inf'), 0.30) # 30% for income above RM 2,000,00]
+    (2000000, float('inf'), 0.30) # 30% for income above RM 2,000,00
+    ]
 
 
 # Frames
