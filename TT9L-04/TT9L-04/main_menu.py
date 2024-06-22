@@ -124,6 +124,12 @@ class Budgetcalculator:
         loan_calculator_window.geometry("500x400")
         loan_calculator = LoanCalculator(loan_calculator_window)
 
+    def open_tax_calculator(self):
+        tax_calculator_window = tk.Toplevel(self.root)
+        tax_calculator_window.title("Tax Calculator")
+        tax_calculator_window.geometry("600x400")
+        tax_calculator = TaxCalculator(tax_calculator_window)
+
     def login(self):
         username = self.login_username_entry.get()
         password = self.login_password_entry.get()
