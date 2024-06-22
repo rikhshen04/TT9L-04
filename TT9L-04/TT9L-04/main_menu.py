@@ -234,3 +234,18 @@ class Budgetcalculator:
 
         self.update_expense(index, new_description, new_amount)
         self.view_expenses()
+
+    def update_expense(self, index, new_description, new_amount):
+        # Use user-specific expense file
+        expense_file = f"{self.current_user}_expenses.txt"
+
+        with open(expense_file, "r") as file:
+            lines = file.readlines()
+
+        with open(expense_file, "w") as file:
+            for i, line in enumerate(lines):
+                if i == index:
+                    file.write(f"{new_description},{new_amount}\n")
+                else:
+                    file.write(line)
+        messagebox.showinfo("Success", "Expense updated successfully!")
