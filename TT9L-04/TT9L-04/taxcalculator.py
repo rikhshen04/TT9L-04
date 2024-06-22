@@ -137,3 +137,7 @@ def update_chart(income, deductions, final_tax):
             chart_canvas.create_text(text_x, text_y, text=f"{label}\n${value:.2f}", fill="black", font=("Arial", 10))
             
             start_angle = end_angle
+
+# Calculate button
+calculate_button = ttk.Button(frame_input, text="Calculate Tax", command=calculate_tax)
+calculate_button.grid(row=4, column=0, columnspan=2, pady=10)
