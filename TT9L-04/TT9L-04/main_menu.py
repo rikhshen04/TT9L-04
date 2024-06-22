@@ -92,3 +92,16 @@ class Budgetcalculator:
         self.expense_amount_entry.grid(row=1, column=1, padx=5, pady=5)
         tk.Button(self.expense_entry_frame, text="Add Expense", font=self.medium_font, command=self.add_expense, bg="#28a745", fg="white").grid(row=2, columnspan=2, pady=10)
         self.expense_entry_frame.pack(pady=10)
+
+        self.buttons_frame = tk.Frame(self.dashboard_frame, bg="#f0f0f0")
+        tk.Button(self.buttons_frame, text="Edit Expense", font=self.medium_font, command=self.edit_expense, bg="#ffc107", fg="white").grid(row=0, column=0, padx=5, pady=5)
+        tk.Button(self.buttons_frame, text="Delete Expense", font=self.medium_font, command=self.delete_expense, bg="#dc3545", fg="white").grid(row=0, column=1, padx=5, pady=5)
+        tk.Button(self.buttons_frame, text="View All Expenses", font=self.medium_font, command=self.view_expenses, bg="#17a2b8", fg="white").grid(row=0, column=2, padx=5, pady=5)
+        tk.Button(self.buttons_frame, text="Logout", font=self.medium_font, command=self.logout, bg="#6c757d", fg="white").grid(row=0, column=3, padx=5, pady=5)
+        self.buttons_frame.pack(pady=10)
+
+        self.tool_buttons_frame = tk.Frame(self.dashboard_frame, bg="#f0f0f0")
+        tk.Button(self.tool_buttons_frame, text="Open Calculator", font=self.medium_font, command=self.open_calculator, bg="#007bff", fg="white").grid(row=0, column=0, padx=10, pady=10, ipadx=10, ipady=10)
+        tk.Button(self.tool_buttons_frame, text="Open Bill Manager", font=self.medium_font, command=self.open_bill_manager, bg="#007bff", fg="white").grid(row=0, column=1, padx=10, pady=10, ipadx=10, ipady=10)
+        tk.Button(self.tool_buttons_frame, text="Open Loan Calculator", font=self.medium_font, command=self.open_loan_calculator, bg="#007bff", fg="white").grid(row=0, column=2, padx=10, pady=10, ipadx=10, ipady=10)
+        self.tool_buttons_frame.pack(pady=20)
