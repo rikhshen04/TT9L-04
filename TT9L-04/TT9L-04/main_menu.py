@@ -171,3 +171,15 @@ class Budgetcalculator:
             file.write(f"{username},{password},0\n")
         messagebox.showinfo("Register", "You have been registered!")
         self.show_login_page()
+
+    def show_login_page(self):
+        self.register_frame.pack_forget()
+        self.login_frame.pack()
+        self.login_username_entry.delete(0, tk.END)
+        self.login_password_entry.delete(0, tk.END)
+
+    def show_register_page(self):
+        self.login_frame.pack_forget()
+        self.register_frame.pack()
+        self.register_username_entry.delete(0, tk.END)
+        self.register_password_entry.delete(0, tk.END)
