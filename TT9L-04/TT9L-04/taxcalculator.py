@@ -35,3 +35,11 @@ frame_result = ttk.Frame(root, padding="10 10 10 10")
 frame_result.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 frame_chart = ttk.Frame(root, padding="10 10 10 10")
 frame_chart.grid(row=0, column=1, rowspan=2, sticky="nsew", padx=10, pady=10)
+
+# Configure grid weights for resizing
+root.grid_rowconfigure(1, weight=1)
+root.grid_columnconfigure(1, weight=1)
+frame_result.grid_rowconfigure(0, weight=1)
+frame_result.grid_columnconfigure(0, weight=1)
+frame_chart.grid_rowconfigure(0, weight=1)
+frame_chart.grid_columnconfigure(0, weight=1)
