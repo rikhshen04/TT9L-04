@@ -279,3 +279,8 @@ class Budgetcalculator:
             with open(expense_file, "r") as file:
                 for line in file:
                     self.expense_listbox.insert(tk.END, line.strip())
+
+    def logout(self):
+        self.dashboard_frame.pack_forget()
+        self.login_frame.pack()
+        self.current_user = None  # Clear current user
