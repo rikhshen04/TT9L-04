@@ -183,3 +183,16 @@ class Budgetcalculator:
         self.register_frame.pack()
         self.register_username_entry.delete(0, tk.END)
         self.register_password_entry.delete(0, tk.END)
+
+    def show_dashboard(self):
+        self.login_frame.pack_forget()
+        self.dashboard_frame.pack()
+        self.points_label.config(text=f"Points: {self.points}")
+
+        if self.points % 5 == 0:
+            # Display a different saving tip each time points are a multiple of 5
+            tip_index = (self.points // 5 - 1) % len(self.saving_tips)
+            saving_tip = self.saving_tips[tip_index]
+            messagebox.showinfo("Congratulations!", f"You have reached {self.points} points! Keep up the great work!\n\nSaving Tip: {saving_tip}")
+
+        self.view_expenses()  # Load user-specific expenses
