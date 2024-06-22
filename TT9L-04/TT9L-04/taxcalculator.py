@@ -20,13 +20,21 @@ style.configure("TEntry", font=("Arial", 12))
 style.configure("Treeview", font=("Arial", 10))
 style.configure("Treeview.Heading", font=("Arial", 12, "bold"))
 
-# Tax brackets
+#Updated Malaysian Tax brackets
 tax_brackets = [
-    (0, 10000, 0.1),    # 10% for income up to $10,000
-    (10000, 30000, 0.15),  # 15% for income between $10,000 and $30,000
-    (30000, 100000, 0.2),  # 20% for income between $30,000 and $100,000
-    (100000, float('inf'), 0.25)  # 25% for income above $100,000
-]
+    (0, 5000, 0.00),       # 0% for income up to RM 5,000
+    (5000, 20000, 0.01),   # 1% for income between RM 5,001 and RM 20,000
+    (20000, 35000, 0.03),  # 3% for income between RM 20,001 and RM 35,000
+    (35000, 50000, 0.08),  # 8% for income between RM 35,001 and RM 50,000
+    (50000, 70000, 0.14),  # 14% for income between RM 50,001 and RM 70,000
+    (70000, 100000, 0.21), # 21% for income between RM 70,001 and RM 100,000
+    (100000, 250000, 0.24),# 24% for income between RM 100,001 and RM 250,000
+    (250000, 400000, 0.245),# 24.5% for income between RM 250,001 and RM 400,000
+    (400000, 600000, 0.25),# 25% for income between RM 400,001 and RM 600,000
+    (600000, 1000000, 0.26),# 26% for income between RM 600,001 and RM 1,000,000
+    (1000000, 2000000, 0.28),# 28% for income between RM 1,000,001 and RM 2,000,000
+    (2000000, float('inf'), 0.30) # 30% for income above RM 2,000,00]
+
 
 # Frames
 frame_input = ttk.Frame(root, padding="10 10 10 10")
